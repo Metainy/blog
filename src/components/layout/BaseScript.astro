@@ -1,0 +1,157 @@
+---
+import { SITE } from "@/config";
+---
+
+<script is:inline define:vars={{ defaultTheme: SITE.defaultTheme }}>
+
+    /**
+     * Helper function to add an event listener to any selector.
+     *
+     * @param {*} selector
+     * @param {string} event
+     * @param {function} callback
+     */
+    function attachEvent(selector, event, callback) {
+
+        const matches = typeof selector === "string" ? document.querySelectorAll(selector) : selector;
+
+        if (matches && matches.length) {
+
+            matches.forEach((element) => {
+                element.addEventListener(event, (e) => callback(e, element), false);
+            });
+        }
+    }
+
+    /**
+     * Decide which theme should be active based on user setting, preferences and site setting.
+     *
+     * @returns {*|string}
+     */
+    function getTheme() {
+
+        // Theme overridden by user
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) return localStorage.getItem("theme");
+
+        // Overridden by site setting
+        if (defaultTheme !== "system") return defaultTheme;
+
+        // User preference
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+        }
+
+        return "light";
+    }
+
+    /**
+     * Apply the correct theme on load.
+     */
+    (function applyTheme() {
+
+        const theme = getTheme();
+
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        localStorage.setItem("theme", theme);
+    })();
+
+    window.onload = function () {
+
+        // Get the button
+        const scrollButton = document.getElementById("scroll-button");
+        const header = document.getElementById("header");
+
+        attachEvent("[data-toggle-menu]", "click", function (_, element) {
+
+            // Change button state
+            element.classList.toggle("expanded");
+
+            // Set the menu as a full screen
+            document.body.classList.toggle("overflow-hidden");
+            document.getElementById("header")?.classList.toggle("min-h-screen");
+
+            // Show the menu
+            document.querySelector("#header nav")?.classList.toggle("hidden");
+        });
+
+        let lastKnownScrollPosition = window.scrollY;
+        let ticking = true;
+
+        /**
+         * Handle header visibility based on scrolling.
+         */
+        function applyHeaderStylesOnScroll() {
+
+            if (!header) return;
+
+            if (lastKnownScrollPosition > 60 && !header.classList.contains("scroll")) {
+
+                document.getElementById("header").classList.add("scroll");
+            } else if (lastKnownScrollPosition <= 60 && header.classList.contains("scroll")) {
+
+                document.getElementById("header").classList.remove("scroll");
+            }
+
+            ticking = false;
+        }
+
+        /**
+         * Handle toggling the scroll to top button.
+         */
+        function scrollToTopHandler() {
+
+            if (!scrollButton) return;
+
+            const threshold = window.innerHeight * 1.5;
+
+            if (document.body.scrollTop > threshold || document.documentElement.scrollTop > threshold) {
+
+                scrollButton.classList.remove("lg:hidden");
+                scrollButton.classList.add("lg:inline-block");
+            } else {
+
+                scrollButton.classList.add("lg:hidden");
+            }
+        }
+
+        applyHeaderStylesOnScroll();
+        scrollToTopHandler();
+
+        attachEvent([document], "scroll", function () {
+
+            lastKnownScrollPosition = window.scrollY;
+
+            if (!ticking) {
+
+                window.requestAnimationFrame(() => {
+                    applyHeaderStylesOnScroll();
+                });
+                ticking = true;
+            }
+
+            scrollToTopHandler();
+        });
+    }
+
+    window.onpageshow = function () {
+
+        document.documentElement.classList.add("motion-safe:scroll-smooth");
+
+        // Change button state
+        const element = document.querySelector("[data-toggle-menu]");
+        if (element) element.classList.remove("expanded");
+
+        // Unset the menu full screen
+        document.body.classList.remove("overflow-hidden");
+        document.getElementById("header")?.classList.remove("h-screen");
+
+        // Hide the menu
+        document.querySelector("#header nav")?.classList.add("hidden");
+    };
+
+</script>

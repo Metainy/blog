@@ -1,0 +1,27 @@
+---
+import { getPosts, getTags } from "@utils/blog";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// Components
+import TagList from "@components/blog/TagList.vue";
+import PageHeading from "@components/common/PageHeading.vue";
+
+// Get all unique tags
+const allPosts = await getPosts();
+const tags = getTags(allPosts);
+---
+
+<BaseLayout pageTitle="Tags">
+
+    <!--Page Header-->
+    <PageHeading title="Tags" subtitle="All the tags used in posts so far" />
+
+    <section>
+
+        <TagList tags={tags} />
+
+    </section>
+
+</BaseLayout>

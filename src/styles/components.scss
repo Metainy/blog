@@ -1,0 +1,49 @@
+// Main content
+.content {
+    @apply max-w-5xl h-full mx-auto px-6 md:px-8 py-12 sm:py-14 lg:py-16;
+}
+
+// Outline button
+.button-outline {
+    @apply rounded-xl border-2 border-on-background-muted inline-flex justify-center items-center py-2.5 px-5 md:px-6
+    font-medium leading-snug text-on-background-dim
+    hover:bg-background-offset1
+    transition ease-in duration-200;
+}
+
+// Icon button
+.button-icon {
+    @apply rounded-lg p-2.5 inline-flex items-center justify-center
+    hover:bg-background-offset1
+    text-on-background-dim
+    transition ease-in duration-200;
+}
+
+// Badge
+.badge {
+    @apply rounded px-2 py-1 text-sm
+    bg-background-offset1
+    text-on-background-dim hover:text-primary;
+}
+
+.badge-primary {
+    @apply rounded-lg px-2.5 py-2.5 inline-flex items-center
+    bg-background-offset1 hover:bg-primary
+    text-on-background hover:text-on-primary;
+}
+
+// Pagination button
+.button-pagination {
+    @apply inline-flex justify-center items-center
+    rounded-lg border-2 border-on-background-muted
+    text-on-background hover:bg-primary hover:border-primary hover:text-on-primary
+    transition duration-300;
+}
+
+.button-pagination.active {
+    @apply pointer-events-none bg-primary text-on-primary border-primary;
+}
+
+.button-pagination.disabled {
+    @apply pointer-events-none opacity-40;
+}

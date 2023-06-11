@@ -1,0 +1,125 @@
+---
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// Components
+import PageHeading from "@components/common/PageHeading.vue";
+import Timeline from "@components/about/Timeline.vue";
+import Preferences from "@components/about/Preferences.vue";
+import DoingNow from "@components/about/DoingNow.vue";
+---
+
+<BaseLayout pageTitle="About">
+
+    <!--Page Header-->
+    <PageHeading title="About" subtitle="Here are some things about me" />
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-14">
+
+        <!--Background-->
+        <div class="col-span-2">
+
+            <h2 class="text-lg font-semibold mb-5">Background</h2>
+
+            <div class="text-justify space-y-4">
+
+                <p>
+                    Hey there! ✋ I'm Mahmoud, a self-taught software developer from Egypt. Currently, I work as a
+                    Technical Lead at GamersLounge, where I help lead our developer experience and build innovative
+                    solutions for our internal use.
+                </p>
+
+                <p>
+                    I come from an Android background, building both small and complex applications long before Kotlin
+                    became a thing. Switching to the back-end was a strange coincidence, something I never really
+                    planned for and I'm still not sure how it happened. Despite working as a full-time back-end
+                    developer for quite some time now, I've always felt behind, as if I don't fully grasp the basic
+                    concepts and never will be able to catch up. However, that hasn't stopped me from continuously
+                    learning and trying to figure out the "right" way to do things.
+                </p>
+
+                <p>
+                    I have always been passionate about tech. Ever since I got my first computer with an insane Pentium
+                    II CPU and 512 MB of RAM 🔥, I fell in love with computers. Now, in my free time, you'll likely find
+                    me glued to a screen, tinkering with some new technology, building these small useless tools that no
+                    body asked for, or staring at my pile of unfinished projects 🤷 I also enjoy playing survival games
+                    and preparing for the zombie apocalypse.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!--Timeline-->
+        <div class="col-span-1">
+
+            <h2 class="text-lg font-semibold mb-5">Timeline</h2>
+
+            <Timeline client:load />
+
+        </div>
+
+        <!--Why The Blog-->
+        <div class="col-span-2">
+
+            <h2 class="text-lg font-semibold mb-5">Why this blog?</h2>
+
+            <div class="text-justify space-y-4">
+
+                <p>
+                    I created this blog to have a centralized place where I can freely express my thoughts, ideas, and
+                    rants about all sorts of random topics. It's not just my personal corner of the internet,
+                    but also an exploratory environment where I can learn and tinker with new
+                    technologies, as well as share my learning journey.
+                </p>
+
+                <p>
+                    In other words, it's more like a digital garden or a knowledge center if you will, where I cultivate
+                    small, unfinished pieces of writing, guides, and snippets, gradually transforming them
+                    into more polished and extensive articles.
+                </p>
+
+                <p>
+                    Writing has always been the most effective method to enhance my skills. Since I always have a
+                    project or two in progress, many of which I work through by following guides and tutorials posted by
+                    others, I often find myself rewriting and rearranging code snippets in a way that makes sense
+                    to me and helps me grasp what's going on. This process requires thorough investigation and
+                    additional research to ensure I've got everything right. However, it doesn't always work well,
+                    which is why I welcome any feedback or suggestions. Pointing out my mistakes is an essential
+                    part of my learning progress.
+                </p>
+
+                <p>
+                    So, in a way, this blog is me learning, exploring, and documenting my own progress with you.
+                    Hopefully, in the future, it will also serve as my way to give back to the community.
+                </p>
+
+                <p class="text-sm text-on-background-dim">
+                    * If you think I'm spreading nonsense or used your work without proper acknowledgement,
+                    please get in touch with me as it was never my intention.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!--Doing Now-->
+        <div class="col-span-1">
+
+            <h2 class="text-lg font-semibold mb-5">Doing Now</h2>
+
+            <DoingNow client:load />
+        </div>
+
+        <!--Who Am I-->
+        <div class="col-span-full">
+
+            <h2 class="text-lg font-semibold mb-5">Who am I?</h2>
+
+            <Preferences client:load />
+
+        </div>
+
+    </section>
+
+</BaseLayout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://metainy.me/sitemap-index.xml

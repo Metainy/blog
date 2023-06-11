@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @import "variables";
+    @import "base";
+    @import "blog";
+}
+
+@layer components {
+    @import "components";
+}
+
+@layer utilities {
+    @import "utilities";
+}

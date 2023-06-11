@@ -1,0 +1,44 @@
+---
+import { getPosts, getCategories } from "@utils/blog";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// Components
+import PostList from "@components/blog/PostList.vue";
+import PageHeading from "@components/common/PageHeading.vue";
+
+/**
+ * Generate static paths for building pages.
+ */
+export async function getStaticPaths() {
+
+    const allPosts = await getPosts();
+    const categories = getCategories(allPosts);
+
+    return categories.map((category) => {
+
+        const filteredPosts = allPosts.filter((post) => post.category.text === category.text);
+
+        return {
+            params: { category: category.slug },
+            props: { category: category, posts: filteredPosts },
+        };
+    });
+}
+
+const { category, posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={category.text}>
+
+    <!--Page Header-->
+    <PageHeading title={category.text} subtitle="all of the posts linked under this category" />
+
+    <section>
+
+        <PostList client:load posts={posts} />
+
+    </section>
+
+</BaseLayout>

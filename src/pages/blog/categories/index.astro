@@ -1,0 +1,27 @@
+---
+import { getPosts, getCategories } from "@utils/blog";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// Components
+import CategoryList from "@components/blog/CategoryList.vue";
+import PageHeading from "@components/common/PageHeading.vue";
+
+// Get all unique categories
+const allPosts = await getPosts();
+const categories = getCategories(allPosts);
+---
+
+<BaseLayout pageTitle="Categories">
+
+    <!--Page Header-->
+    <PageHeading title="Categories" subtitle="All the Categories used in posts so far" />
+
+    <section>
+
+        <CategoryList categories={categories} />
+
+    </section>
+
+</BaseLayout>

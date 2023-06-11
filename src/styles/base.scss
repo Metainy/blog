@@ -1,0 +1,13 @@
+html {
+    @apply text-lg;
+}
+
+body {
+    @apply antialiased scroll-smooth leading-relaxed tracking-tight
+    flex flex-col min-h-screen
+    bg-background text-on-background font-normal;
+}
+
+mark {
+    @apply bg-accent text-on-accent rounded px-1;
+}

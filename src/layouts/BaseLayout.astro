@@ -1,0 +1,74 @@
+---
+import { SITE, FOOTER, HEADER } from "@/config";
+
+// Components
+import BaseHead from "@components/layout/BaseHead.astro";
+import BaseScript from "@components/layout/BaseScript.astro";
+import Header from "@components/layout/Header.vue";
+import Footer from "@components/layout/Footer.vue";
+import SearchModal from "@components/common/SearchModal.vue";
+import BackToTop from "../components/common/BackToTop.vue";
+// import Maze from "@components/layout/Maze.astro";
+
+export interface Props {
+    pageTitle?: string;
+    description?: string;
+    ogImage?: string;
+    useTitleTemplate?: boolean;
+}
+
+// Config
+const { language, textDirection } = SITE;
+
+// Props
+const { pageTitle, description, ogImage, useTitleTemplate } = Astro.props;
+
+// URL
+const { pathname } = Astro.url;
+---
+
+<!DOCTYPE html>
+<html lang={language} dir={textDirection}>
+<head>
+
+    <BaseHead
+        pageTitle={pageTitle}
+        description={description}
+        ogImage={ogImage}
+        useTitleTemplate={useTitleTemplate}
+    />
+
+    <!--Default Title-->
+    <title>Metainy</title>
+
+</head>
+
+<body>
+
+    <!--Header-->
+    <Header client:load headerData={HEADER} currentPath={pathname} />
+
+    <!--Content-->
+    <main class="flex-grow fade-enter" style="--enter-stage:2">
+        <div class="content">
+            <slot />
+        </div>
+    </main>
+
+    <!--Footer-->
+    <Footer client:load footerData={FOOTER} />
+
+    <!--Search Dialog-->
+    <SearchModal client:load />
+
+    <!--To Top Button-->
+    <BackToTop client:load />
+
+    <!--Main JS Script-->
+    <BaseScript />
+
+    <!--Background Maze-->
+    <!--<Maze />-->
+
+</body>
+</html>

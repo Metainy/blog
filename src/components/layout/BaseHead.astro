@@ -1,0 +1,86 @@
+---
+// Fonts
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+
+// Styles
+import "@/styles/main.scss";
+
+import { SITE } from "@/config";
+import { SEO } from "astro-seo";
+import { getCanonical } from "@utils/permalinks";
+import GoogleAnalytics from "@components/layout/GoogleAnalytics.astro";
+
+export interface Props {
+    pageTitle?: string;
+    description?: string;
+    ogImage?: string;
+    useTitleTemplate?: boolean;
+}
+
+const defaultOGImage = new URL(SITE.defaultOGImage, Astro.site).toString();
+
+// Props
+let {
+    pageTitle = SITE.title,
+    description = SITE.description,
+    ogImage,
+    useTitleTemplate = true,
+} = Astro.props;
+
+const canonicalURL = getCanonical(String(Astro.url.pathname)).toString();
+
+ogImage = ogImage ? new URL(ogImage, Astro.site).toString() : defaultOGImage;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<SEO
+    title={pageTitle}
+    titleTemplate={useTitleTemplate && pageTitle ? `%s - ${SITE.name}` : "%s"}
+    description={description}
+
+    canonical={canonicalURL}
+    noindex={false}
+    nofollow={false}
+
+    openGraph={{
+        basic: {
+            title: pageTitle,
+            description: description,
+            type: "website",
+            url: canonicalURL,
+            image: ogImage
+        }
+    }}
+
+    twitter={{
+        title: pageTitle,
+        description: description,
+        image: ogImage,
+        creator: "@el_metainy",
+        site: "@el_metainy",
+        card: "summary_large_image",
+    }}
+/>
+
+<!--Google Site Verification-->
+{SITE.googleSiteVerificationId &&
+<meta name="google-site-verification" content={SITE.googleSiteVerificationId} />}
+
+<!--Google Analytics-->
+{SITE.googleAnalyticsId &&
+<GoogleAnalytics id={String(SITE.googleAnalyticsId)} partytown={true} />}
+
+<!--Favicon-->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="mask-icon" href="/favicon.svg" color="#8D46E7" />
+
+<!--Manifest-->
+<link rel="manifest" href="/site.webmanifest">
+
+<!--Site Map-->
+<link rel="sitemap" href="/sitemap-index.xml" />

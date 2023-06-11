@@ -1,0 +1,42 @@
+:root {
+    --family-sans: "Inter Variable";
+    --family-mono: "JetBrains Mono Variable";
+
+    // Main colors
+    --color-background: 241 245 249; // Slate 100
+    --color-background-offset1: 226 232 240; // Slate 200
+    --color-background-offset2: 203 213 225; // Slate 300
+
+    --color-surface: 248 250 252; // Slate 100;
+    --color-primary: 37 99 235; // Blue 600
+    --color-accent: 219 39 119; // Pink 600
+    --color-secondary: 30 41 59; // Slate 800
+
+    // Overlay and text colors
+    --color-on-background-bright: 30 41 59; // Slate 800
+    --color-on-background: 51 65 85; // Slate 700
+    --color-on-background-dim: 71 85 105; // Slate 600
+    --color-on-background-muted: 100 116 139; // Slate 500
+
+    --color-on-surface: 30 41 59; // Slate 800
+    --color-on-primary: 241 245 249; // Slate 100
+    --color-on-accent: 241 245 249; // Slate 100
+    --color-on-secondary: 241 245 249; // Slate 100
+}
+
+:root.dark {
+
+    // Main colors
+    --color-background: 15 23 42; // Slate 900
+    --color-background-offset1: 30 41 59; // Slate 800
+    --color-background-offset2: 51 65 85; // Slate 700
+
+    --color-primary: 14 165 233; // Sky 500
+    --color-accent: 236 72 153; // Pink 500
+
+    // Overlay and text colors
+    --color-on-background-bright: 226 232 240; // Slate 200
+    --color-on-background: 203 213 225; // Slate 300
+    --color-on-background-dim: 148 163 184; // Slate 400
+    --color-on-background-muted: 100 116 139; // Slate 500
+}

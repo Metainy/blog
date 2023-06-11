@@ -1,0 +1,38 @@
+---
+import { BLOG } from "@/config";
+import { getPosts } from "@utils/blog";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro"
+
+// Components
+import PostList from "@components/blog/PostList.vue";
+import Pagination from "@components/blog/Pagination.vue";
+import PageHeading from "@components/common/PageHeading.vue";
+
+/**
+ * Generate static paths for building pages.
+ */
+export async function getStaticPaths({ paginate }) {
+
+    const posts = await getPosts();
+    return paginate(posts, { pageSize: BLOG.postsPerPage });
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout pageTitle="Blog">
+
+    <!--Page Header-->
+    <PageHeading title="Posts" subtitle="Writings about coding, life, productivity and more" />
+
+    <section>
+
+        <PostList client:load posts={page.data} />
+        <Pagination client:load currentPage={page.currentPage} totalPages={page.lastPage} />
+
+    </section>
+
+</BaseLayout>
+

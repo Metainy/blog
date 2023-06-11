@@ -1,0 +1,48 @@
+---
+import { getPosts, getSimilarPosts } from "@utils/blog";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro"
+
+// Components
+import Post from "@components/blog/Post.vue";
+
+// Types
+import type { Post as BlogPost } from "@/types";
+
+export interface Props {
+    post: BlogPost;
+}
+
+/**
+ * Generate static paths for building pages.
+ */
+export async function getStaticPaths() {
+
+    const posts = await getPosts();
+
+    return posts.map((post) => {
+
+        return { params: { post: post.slug }, props: { post } };
+    });
+}
+
+const { post } = Astro.props;
+const Content = post.Content;
+
+// Get similar posts
+const posts = await getPosts();
+const similarPosts = getSimilarPosts(post, posts);
+---
+
+<BaseLayout pageTitle={post.title} description={post.description} ogImage={post.cover}>
+
+    <section data-pagefind-body>
+
+        <Post client:load post={post} similarPosts={similarPosts}>
+            <Content />
+        </Post>
+
+    </section>
+
+</BaseLayout>

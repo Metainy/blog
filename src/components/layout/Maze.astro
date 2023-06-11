@@ -1,0 +1,97 @@
+---
+import { SITE } from "@/config";
+---
+
+<svg class="maze fixed -z-10 opacity-30 dark:opacity-20 stroke-background-offset1" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-width="0.15" fill="none" stroke-linejoin="round" stroke-linecap="round" d="" />
+</svg>
+
+<script is:inline define:vars={{ defaultTheme: SITE.defaultTheme }}>
+
+    startMaze();
+
+    function startMaze() {
+
+        const CELL_SIZE = 16;
+        const FPS = 500;
+
+        let then = Date.now();
+        let cycleCount = 0;
+
+        const w = Math.ceil(window.innerWidth / CELL_SIZE);
+        const h = Math.ceil(window.innerHeight / CELL_SIZE);
+
+        const svg = document.querySelector(".maze");
+        svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+
+        const start = [0, 0];
+        const stack = [start];
+        const visited = new Set([start.join(",")]);
+
+        const path = svg.querySelector("path");
+        path.setAttribute("d", `M${start[0]},${start[1]}`);
+
+        let moveNext = false;
+
+        function animate() {
+
+            const now = Date.now();
+            const deltaTime = now - then;
+
+            if (deltaTime > 1000 / FPS) {
+
+                if (stack.length <= 0 || cycleCount / w > 30) return;
+
+                const cell = stack[stack.length - 1];
+                const neighbor = getRandomNeighbor(cell, visited, w, h);
+
+                if (neighbor) {
+
+                    stack.push(neighbor);
+                    visited.add(neighbor.join(','));
+                    appendToPath(path, neighbor, moveNext);
+                    moveNext = false;
+                } else {
+
+                    stack.pop();
+                    moveNext = true;
+                }
+
+                then = now;
+                cycleCount++;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Run the animation frame
+        animate();
+    }
+
+    function getNeighbors(cell, visited, w, h) {
+
+        let neighbors = [];
+        const [x, y] = cell;
+        if (x > 0) neighbors.push([x - 1, y]);
+        if (x < w - 1) neighbors.push([x + 1, y]);
+        if (y > 0) neighbors.push([x, y - 1]);
+        if (y < h - 1) neighbors.push([x, y + 1]);
+        neighbors = neighbors.filter((n) => !visited.has(n.join(',')));
+
+        return neighbors;
+    }
+
+    function getRandomNeighbor(cell, visited, w, h) {
+
+        const neighbors = getNeighbors(cell, visited, w, h);
+        if (neighbors.length === 0) return null;
+        return neighbors[Math.floor(Math.random() * neighbors.length)];
+    }
+
+    function appendToPath(path, cell, isMove) {
+
+        const d = path.getAttribute("d");
+        path.setAttribute("d", d + ` ${isMove ? "M" : "L"}${cell[0]},${cell[1]}`);
+    }
+
+</script>

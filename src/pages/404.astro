@@ -1,0 +1,36 @@
+---
+import { getHomePermalink } from "@utils/permalinks";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout pageTitle="Error 404">
+
+    <section class="flex items-center h-full">
+        <div class="flex flex-col items-center justify-center mx-auto my-8 px-5 text-on-background">
+
+            <div class="max-w-md text-center">
+
+                <h2 class="mb-8 font-bold text-9xl">
+                    <span class="sr-only">Error</span>
+                    <span class="text-primary">404</span>
+                </h2>
+
+                <p class="font-semibold text-3xl md:text-3xl">
+                    Sorry, we couldn't find this page.
+                </p>
+
+                <p class="mt-4 mb-12 text-lg text-on-background-dim">
+                    You can find plenty of other things on our homepage.
+                </p>
+
+                <a rel="noopener noreferrer" aria-label="Home" href={getHomePermalink()} class="button-outline">
+                    Back to homepage
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+</BaseLayout>

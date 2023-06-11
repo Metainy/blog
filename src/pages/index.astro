@@ -1,0 +1,28 @@
+---
+import { BLOG } from "@/config";
+import { getPosts, getPagesNumber } from "@utils/blog";
+
+// Layouts
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// Components
+import PostList from "@components/blog/PostList.vue";
+import Pagination from "@components/blog/Pagination.vue";
+
+const posts = await getPosts();
+
+// Get pagination data
+const pagesNum = getPagesNumber(posts.length, BLOG.postsPerPage);
+const currentPosts = posts.slice(0, BLOG.postsPerPage);
+---
+
+<BaseLayout pageTitle="Home">
+
+    <section>
+
+        <PostList client:load posts={currentPosts} homeView={true} />
+        <Pagination client:load currentPage={1} totalPages={pagesNum} />
+
+    </section>
+
+</BaseLayout>
