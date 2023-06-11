@@ -55,6 +55,6 @@ jobs:
           # Destination directory, where are files will be copied to
           remote_path: /var/www/metainy.me/public_html
           # Will delete all files in the remote path before uploading
-          delete_remote_files: true
+          delete_remote_files: false
           # SFTP args
           sftpArgs: "-o ConnectTimeout=5"
