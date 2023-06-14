@@ -9,6 +9,8 @@
       class="hidden brightness-90 aspect-video object-cover group-hover:scale-105 transition ease-in-out duration-500"
       :src="post.cover"
       :alt="post.title"
+      width="50"
+      height="50"
       data-pagefind-meta="image[src]"
     />
 
