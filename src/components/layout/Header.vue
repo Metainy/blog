@@ -11,7 +11,11 @@
       <div class="flex gap-2 order-1">
 
         <!--Nav Brand-->
-        <a class="flex items-center justify-center gap-2 group" :href="getHomePermalink()">
+        <a
+          :href="getHomePermalink()"
+          class="flex items-center justify-center gap-2 group"
+          aria-label="Logo"
+        >
 
           <Logo />
 
