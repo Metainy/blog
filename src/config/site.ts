@@ -4,7 +4,7 @@ export const SITE = {
 
     title: "Metainy",
 
-    description: "My personal corner of the internet where share all sorts of random stuff.",
+    description: "My personal corner of the internet where I share all sorts of random stuff.",
 
     URL: "https://metainy.me",
 
