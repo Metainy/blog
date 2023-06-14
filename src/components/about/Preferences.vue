@@ -8,14 +8,14 @@
       <div class="flex flex-col">
 
         <span class="font-semibold text-xs text-on-background-muted pb-px">{{ item.category }}</span>
-        <span class="font-medium" :class="item.color">{{ item.text }}</span>
+        <span class="font-medium text-sm md:text-base" :class="item.color">{{ item.text }}</span>
 
       </div>
 
       <span
         class="text-on-background-muted transition duration-300 group-hover:rotate-[360deg] group-hover:scale-110 "
       >
-        <Icon :icon="item.icon" class="h-8 w-8" />
+        <Icon :icon="item.icon" class="h-6 w-6 md:w-8 md:h-8" />
       </span>
 
     </div>
