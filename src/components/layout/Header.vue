@@ -24,7 +24,7 @@
       </div>
 
       <!--Navigation-->
-      <nav aria-label="Navigation" class="hidden md:block w-full md:w-auto order-3 md:order-2">
+      <nav id="navigation" aria-label="Navigation" class="hidden md:block w-full md:w-auto order-3 md:order-2">
 
         <ul class="navigation-list">
           <li v-for="item in headerData?.nav" class="py-0.5">
@@ -210,6 +210,10 @@ export default defineComponent({
      * @param itemName
      */
     expandDropdown(target: HTMLElement, itemName: string) {
+
+      // Skip the click to open menu group when not in mobile view
+      const navigation = document.querySelector("#navigation");
+      if (navigation?.classList.contains("hidden")) return;
 
       const menu = document.querySelector(`[data-menu="${itemName}"]`);
 
