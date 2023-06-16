@@ -5,7 +5,7 @@
     class="flex gap-2 items-center rounded bg-background hover:bg-background-offset2 mx-2 p-2"
   >
 
-    <div class="w-1/5">
+    <div class="hidden md:block w-1/5">
       <img
         v-if="item.meta.image"
         class="brightness-90 aspect-video object-cover rounded transition ease-in-out duration-500"
@@ -14,7 +14,7 @@
       />
     </div>
 
-    <div class="w-4/5 text-sm flex flex-col gap-2">
+    <div class="md:w-4/5 text-sm flex flex-col gap-2">
 
       <p class="mr-1 font-semibold">
         {{ item.meta.title }}
