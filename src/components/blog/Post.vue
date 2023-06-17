@@ -64,18 +64,32 @@
   </div>
 
   <!--Post Content-->
-  <div class="grid grid-cols-12 gap-12 items-start max-w-5xl mx-auto py-12 sm:py-14 lg:py-16">
+  <div class="flex gap-12 items-start max-w-5xl mx-auto py-12 sm:py-14 lg:py-16">
 
     <!--Table of Contents-->
-    <nav v-if="post.side" class="col-span-3 hidden lg:block order-2 sticky top-24 mt-1" data-pagefind-ignore>
+    <nav v-if="post.side" class="flex-none w-[230px] hidden lg:block order-2 sticky top-24 mt-1" data-pagefind-ignore>
       <ToC :headings="post.headings"></ToC>
     </nav>
 
     <!--Article-->
-    <article class="col-span-full lg:col-span-9 max-w-none  blog slide-enter-content">
+    <div id="article" class="flex-1 max-w-none blog slide-enter-content">
       <slot />
-    </article>
+    </div>
+
   </div>
+
+  <!--  <div class="grid grid-cols-12 gap-12 items-start max-w-5xl mx-auto py-12 sm:py-14 lg:py-16">-->
+
+  <!--    &lt;!&ndash;Table of Contents&ndash;&gt;-->
+  <!--    <nav v-if="post.side" class="col-span-3 hidden lg:block order-2 sticky top-24 mt-1" data-pagefind-ignore>-->
+  <!--      <ToC :headings="post.headings"></ToC>-->
+  <!--    </nav>-->
+
+  <!--    &lt;!&ndash;Article&ndash;&gt;-->
+  <!--    <article class="col-span-full lg:col-span-9 max-w-none  blog slide-enter-content">-->
+  <!--      <slot />-->
+  <!--    </article>-->
+  <!--  </div>-->
 
   <!--Post Footer-->
   <div class="flex items-center justify-between" data-pagefind-ignore>

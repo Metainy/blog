@@ -74,7 +74,7 @@ export default defineComponent({
       });
 
       // Observe all the sections of the article
-      document.querySelectorAll("article section").forEach((section) => {
+      document.querySelectorAll("#article section").forEach((section) => {
         observer.observe(section);
       });
     },

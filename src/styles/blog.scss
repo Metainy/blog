@@ -52,7 +52,7 @@
 
     prose-strong:text-on-background-bright
 
-    prose-hr:border-background-offset2
+    prose-hr:border-background-offset2;
 }
 
 // Links
@@ -68,7 +68,7 @@
 .prose code:not(pre code) {
     @apply rounded bg-background-offset2 p-0.5 px-1 font-sans font-normal text-on-background
     whitespace-break-spaces
-    before:content-[""] after:content-[""]
+    before:content-[""] after:content-[""];
 }
 
 // Pretty Code Container
@@ -95,7 +95,7 @@
 
 // Code Body
 .prose div[data-rehype-pretty-code-fragment] code {
-    @apply grid;
+    @apply grid w-0;
 }
 
 // Code Line
