@@ -25,11 +25,11 @@
 
     prose-headings:text-primary
     prose-headings:font-bold
-    prose-h2:text-4xl
-    prose-h3:text-3xl
-    prose-h4:text-2xl
-    prose-h5:text-xl prose-h5:mt-8 prose-h5:mb-3
-    prose-h6:text-xl prose-h6:mt-4 prose-h6:mb-2
+    md:prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-6
+    md:prose-h3:text-3xl prose-h3:mt-14 prose-h3:mb-5
+    md:prose-h4:text-2xl prose-h4:mt-12 prose-h4:mb-4
+    md:prose-h5:text-xl prose-h5:mt-10 prose-h5:mb-3
+    md:prose-h6:text-xl prose-h6:mt-8 prose-h6:mb-2
 
     prose-blockquote:rounded-lg
     prose-blockquote:border-primary
@@ -53,6 +53,11 @@
     prose-strong:text-on-background-bright
 
     prose-hr:border-background-offset2;
+}
+
+// Headings
+.prose h6 + *, .prose h5 + * {
+    @apply mt-0;
 }
 
 // Links
