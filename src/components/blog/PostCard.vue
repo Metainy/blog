@@ -19,8 +19,8 @@
         class="brightness-90 aspect-video object-cover group-hover:scale-105 group-hover:brightness-75 transition-all ease-in-out duration-500"
         :src="post.cover"
         :alt="post.title"
-        width="100%"
-        height="100%"
+        width="1600"
+        height="900"
       />
 
     </a>
