@@ -1,7 +1,7 @@
 ---
 title: JavaScript Naming Conventions
 publishDate: 2023-02-06T00:00:00.000Z
-description: Types of Symlinks and how to create and delete them
+description: Guideline on Javascript naming conventions and best practices
 category: Guides
 tags:
   - Javascript
